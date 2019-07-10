@@ -8,28 +8,7 @@ DS3231  rtc(SDA, SCL);
 time_t t;
 int compiled_time[3];
 bool luz=false,oxigenador=false;
-
-/*int parseTime(char* times,int pos){
-   
-   int count=0,v;
-   char* command = strtok(times, ":");
- 
-   while (command != 0) {
-
-      if(count==pos){
-        v=atoi(command); 
-        Serial.println(command);
-
-        return v; 
-      }
-
-      command = strtok(0, ":");
-       Serial.println(command);
-      count++;
-   }
-   
-}*/
-
+//CAMBIO
 int sensorDepPin = 7;
 int sensorTankPin = 6;
 int Led23= 22;
