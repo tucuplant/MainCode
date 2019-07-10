@@ -12,6 +12,7 @@ bool luz=false,oxigenador=false;
 //PERICO EL DE LOS PALOTES
 //PERICO EL DE LOS PALOTES
 //PERICO EL DE LOS PALOTES
+//CAMBIO
 int sensorDepPin = 7;
 int sensorTankPin = 6;
 int Led23= 22;
