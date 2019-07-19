@@ -1,80 +1,55 @@
-unsigned long preTimeStep = 0, curTimeStep = 0, preTimeOn = 0, curTimeOn = 0;
-const long stepInterval = 60, onInterval = stepInterval * 8;
-int i = 22, y = i + 1;
-int blur = 3; //MAX blur=4
-bool power = false;
+unsigned long blink_preTimeStep = 0, blink_curTimeStep = 0, blink_preTimeOn = 0, blink_curTimeOn = 0;
+const long blink_stepInterval = 60, blink_onInterval = blink_stepInterval * 8;
+int blink_i = 22, blink_y = blink_i + 1;
+int blink_blur = 3; //MAX blur=4
+bool blink_power = false;
 /*------ */
+
 void m_blink(bool w, bool r)
 {
 
-    curTimeStep = millis();
-    curTimeOn = millis();
+    blink_curTimeStep = millis();
+    blink_curTimeOn = millis();
 
-    if (curTimeOn - preTimeOn >= onInterval)
+    if (blink_curTimeOn - blink_preTimeOn >= blink_onInterval)
     {
-        if (!power)
-            power = true, i = 22;
+        if (!blink_power)
+            blink_power = true, blink_i = 22;
         else
-            power = false;
-        preTimeOn = curTimeOn;
+            blink_power = false;
+        blink_preTimeOn = blink_curTimeOn;
     }
 
-    if (power && (curTimeStep - preTimeStep >= stepInterval))
+    if (blink_power && (blink_curTimeStep - blink_preTimeStep >= blink_stepInterval))
     {
 
         if (w)
-            Serial.print("W : "), Serial.println(i), digitalWrite(i, HIGH), digitalWrite(i - blur+1, LOW);
+            Serial.print("W : "), Serial.println(blink_i), digitalWrite(blink_i, HIGH), digitalWrite(blink_i - blink_blur+1, LOW);
         else
-            digitalWrite(i, LOW);
+            digitalWrite(blink_i, LOW);
 
         if (r)
-            Serial.print("R : "), Serial.println(y), digitalWrite(y, HIGH), digitalWrite(y - blur+1, LOW);
+            Serial.print("R : "), Serial.println(blink_y), digitalWrite(blink_y, HIGH), digitalWrite(blink_y - blink_blur+1, LOW);
         else
-            digitalWrite(y, LOW);
+            digitalWrite(blink_y, LOW);
 
         /**Si quitas el LOW, lo mantiene encendido, barra de carga */
         //digitalWrite(i, LOW);
         //digitalWrite(i, LOW);
-        i += 2;
-        y = i + 1;
+        blink_i += 2;
+        blink_y = blink_i + 1;
 
-        if (i > 37)
-            i = 22, y = i + 1;
+        if (blink_i > 37)
+            blink_i = 22, blink_y = blink_i + 1;
 
-        preTimeStep = curTimeStep;
+        blink_preTimeStep = blink_curTimeStep;
     }
 
-    /* for (int i = 22; i <= 37; i += 2)
-    {
-        if (w)
-            digitalWrite(i, HIGH);
-
-        int y = i + 1;
-        if (r)
-            digitalWrite(y, HIGH);
-
-        if (curTime - preTime >= 20)
-        {
-            digitalWrite(i, LOW);
-            digitalWrite(y, LOW);
-            preTime = curTime;
-        }
-        //delay(10);
-    }*/
 }
 
 void init_blink()
 {
-    pinMode(Led23, OUTPUT);
-    pinMode(Led24, OUTPUT);
-    pinMode(Led25, OUTPUT);
-    pinMode(Led26, OUTPUT);
-    pinMode(Led27, OUTPUT);
-    pinMode(Led28, OUTPUT);
-    pinMode(Led29, OUTPUT);
-    pinMode(Led30, OUTPUT);
-    pinMode(Led31, OUTPUT);
-    pinMode(Led32, OUTPUT);
-    pinMode(Led33, OUTPUT);
-    pinMode(Led34, OUTPUT);
+    for(unsigned i=22; i<34; i++)
+    pinMode(i,OUTPUT);
+    
 }

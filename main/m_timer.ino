@@ -1,22 +1,22 @@
 #include <DS3231.h>
 DS3231 rtc(SDA, SCL);
 const int timer_num_intervalos = 3;
-bool onTime[timer_num_intervalos];
+bool timer_onTime[timer_num_intervalos];
 int timer_intervalos[timer_num_intervalos][2];
 
 bool getOntime(int i)
 {
-  if (i < sizeof(onTime))
+  if (i < sizeof(timer_onTime))
   {
-    int hora = rtc.getTime().hour;
+    int timer_hora = rtc.getTime().hour;
 
-    if ((hora > timer_intervalos[i][0] && hora < timer_intervalos[i][1]))
-      onTime[i] = true;
+    if ((timer_hora > timer_intervalos[i][0] && timer_hora < timer_intervalos[i][1]))
+      timer_onTime[i] = true;
     else
-      onTime[i] = false;
+      timer_onTime[i] = false;
   }
 
-  return onTime[i];
+  return timer_onTime[i];
 }
 
 void m_timer()
@@ -36,8 +36,8 @@ void m_timer()
 
 void init_timer()
 {
-  for (unsigned i = 0; i < sizeof(onTime); i++)
-    onTime[i] = false;
+  for (unsigned i = 0; i < sizeof(timer_onTime); i++)
+    timer_onTime[i] = false;
 
   //timer_num_intervalos tiene que ser igual al numero de intervalos
   timer_intervalos[0][0] = 8,timer_intervalos[0][1] = 21,  //luz
