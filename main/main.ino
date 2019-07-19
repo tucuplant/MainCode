@@ -1,13 +1,13 @@
-#include <Time.h>
-#include <TimeLib.h>
-#include <DS3231.h>
-#include <LiquidCrystal.h> // Incluye la Libreria LiquidCrystal
-LiquidCrystal lcd(1, 2, 37,39, 41, 43); // Crea un Objeto LC. Parametros: (rs, enable, d4, d5, d6, d7)
 
-DS3231  rtc(SDA, SCL);
-time_t t;
-int compiled_time[3];
-bool luz=false,oxigenador=false;
+//#include <DS3231.h>
+#include <LiquidCrystal.h> // Incluye la Libreria LiquidCrystal
+
+/**VARIABLES */
+//CLOCK
+//LCD
+LiquidCrystal lcd(1, 2, 37,39, 41, 43); // Crea un Objeto LC. Parametros: (rs, enable, d4, d5, d6, d7)
+/**VARIABLES */
+
 
 int Led23= 22;
 int Led24= 23;
@@ -25,9 +25,11 @@ int Led34= 33;
 
 void setup() {
   Serial.begin(9600);
+  init_timer();
   //Serial.println("Inicio de sketch - valores del depósto");
   //pinMode(sensorDepPin, INPUT);
   //pinMode(sensorTankPin, INPUT);
+  pinMode(9, OUTPUT);
   pinMode(Led23, OUTPUT);
   pinMode(Led24, OUTPUT);
   pinMode(Led25, OUTPUT);
@@ -41,10 +43,13 @@ void setup() {
   pinMode(Led33, OUTPUT);
   pinMode(Led34, OUTPUT);
 
+
+
 }
 
 void loop() {
-
+  m_timer();
+  
   for (int i = 22; i <= 37; i+=2) {
     digitalWrite(i, HIGH);
     int y=i+1;
