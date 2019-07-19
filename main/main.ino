@@ -1,5 +1,4 @@
 
-//#include <DS3231.h>
 #include <LiquidCrystal.h> // Incluye la Libreria LiquidCrystal
 
 /**VARIABLES */
@@ -25,41 +24,19 @@ int Led34= 33;
 
 void setup() {
   Serial.begin(9600);
+  init_blink();
   init_timer();
-  //Serial.println("Inicio de sketch - valores del depósto");
-  //pinMode(sensorDepPin, INPUT);
-  //pinMode(sensorTankPin, INPUT);
+  
+
   pinMode(9, OUTPUT);
-  pinMode(Led23, OUTPUT);
-  pinMode(Led24, OUTPUT);
-  pinMode(Led25, OUTPUT);
-  pinMode(Led26, OUTPUT);
-  pinMode(Led27, OUTPUT);
-  pinMode(Led28, OUTPUT);
-  pinMode(Led29, OUTPUT);
-  pinMode(Led30, OUTPUT);
-  pinMode(Led31, OUTPUT);
-  pinMode(Led32, OUTPUT);
-  pinMode(Led33, OUTPUT);
-  pinMode(Led34, OUTPUT);
-
-
 
 }
 
 void loop() {
   m_timer();
+  m_blink(true,true);
   
-  for (int i = 22; i <= 37; i+=2) {
-    digitalWrite(i, HIGH);
-    int y=i+1;
-    digitalWrite(y, HIGH);
-    delay(20);
-    digitalWrite(i, LOW);    
-    digitalWrite(y, LOW);
-    delay(10);
+   
 
-  }    
-
-   delay(300);
+   //delay(100);
 }
