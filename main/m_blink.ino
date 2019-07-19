@@ -1,7 +1,7 @@
 unsigned long preTimeStep = 0, curTimeStep = 0, preTimeOn = 0, curTimeOn = 0;
-const long stepInterval = 15, onInterval = 250;
-int i = 21,y=i+1;
-int blur = 3;
+const long stepInterval = 60, onInterval = stepInterval * 8;
+int i = 22, y = i + 1;
+int blur = 3; //MAX blur=4
 bool power = false;
 /*------ */
 void m_blink(bool w, bool r)
@@ -12,37 +12,34 @@ void m_blink(bool w, bool r)
 
     if (curTimeOn - preTimeOn >= onInterval)
     {
-        if(!power)
-        power = true;
+        if (!power)
+            power = true, i = 22;
         else
-        power = false;
+            power = false;
         preTimeOn = curTimeOn;
-
     }
-  
 
-    if (power&&(curTimeStep - preTimeStep >= stepInterval))
+    if (power && (curTimeStep - preTimeStep >= stepInterval))
     {
-       
 
         if (w)
-        digitalWrite(i, HIGH);
-        
-        if (r)
-        digitalWrite(y, HIGH);
+            Serial.print("W : "), Serial.println(i), digitalWrite(i, HIGH), digitalWrite(i - blur+1, LOW);
+        else
+            digitalWrite(i, LOW);
 
-        digitalWrite(i - blur, LOW);
-        digitalWrite(y - blur, LOW);
+        if (r)
+            Serial.print("R : "), Serial.println(y), digitalWrite(y, HIGH), digitalWrite(y - blur+1, LOW);
+        else
+            digitalWrite(y, LOW);
 
         /**Si quitas el LOW, lo mantiene encendido, barra de carga */
         //digitalWrite(i, LOW);
         //digitalWrite(i, LOW);
-        i++;
+        i += 2;
         y = i + 1;
-        if (i > 37)
-            i = 21;
 
-        
+        if (i > 37)
+            i = 22, y = i + 1;
 
         preTimeStep = curTimeStep;
     }
