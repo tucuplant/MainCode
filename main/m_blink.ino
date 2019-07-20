@@ -24,12 +24,12 @@ void m_blink(bool w, bool r)
     {
 
         if (w)
-            Serial.print("W : "), Serial.println(blink_i), digitalWrite(blink_i, HIGH), digitalWrite(blink_i - blink_blur+1, LOW);
+            digitalWrite(blink_i, HIGH), digitalWrite(blink_i - blink_blur + 1, LOW);
         else
             digitalWrite(blink_i, LOW);
 
         if (r)
-            Serial.print("R : "), Serial.println(blink_y), digitalWrite(blink_y, HIGH), digitalWrite(blink_y - blink_blur+1, LOW);
+            digitalWrite(blink_y, HIGH), digitalWrite(blink_y - blink_blur + 1, LOW);
         else
             digitalWrite(blink_y, LOW);
 
@@ -44,12 +44,10 @@ void m_blink(bool w, bool r)
 
         blink_preTimeStep = blink_curTimeStep;
     }
-
 }
 
 void init_blink()
 {
-    for(unsigned i=22; i<34; i++)
-    pinMode(i,OUTPUT);
-    
+    for (unsigned i = 22; i < 34; i++)
+        pinMode(i, OUTPUT);
 }
