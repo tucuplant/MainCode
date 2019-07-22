@@ -1,48 +1,56 @@
 #include <DS3231.h>
 DS3231 rtc(SDA, SCL);
 const int timer_num_intervalos = 3;
-bool onTime[timer_num_intervalos];
-int timer_intervalos[timer_num_intervalos][2];
+bool timer_onTime[timer_num_intervalos];
+int timer_intervalos[timer_num_intervalos][3];
 
-bool getOntime(int i)
+bool timer_getOnTime(int num_t)
 {
-  if (i < sizeof(onTime))
+  if (num_t < (sizeof(timer_onTime)/sizeof(timer_onTime[0])))
   {
-    int hora = rtc.getTime().hour;
-
-    if ((hora > timer_intervalos[i][0] && hora < timer_intervalos[i][1]))
-      onTime[i] = true;
+    
+    int timer_hora = rtc.getTime().hour;
+    if ((timer_hora > timer_intervalos[num_t][0] && timer_hora < timer_intervalos[num_t][1]))
+      timer_onTime[num_t] = true;
     else
-      onTime[i] = false;
+      timer_onTime[num_t] = false;
   }
 
-  return onTime[i];
+  return timer_onTime[num_t];
+}
+
+int timer_getGate(int i){
+  return timer_intervalos[i][2];
+}
+int timer_getTimerOfGate(int i){
+  return timer_intervalos[i][2];
+}
+
+bool timer_gateIsOnTime(int g){
+ 
+   for (unsigned i = 0; i < timer_num_intervalos; i++)
+  {
+ 
+    if(timer_getOnTime(i)&&timer_intervalos[i][2]==g)
+    return true;
+    
+  }
+  return false;
 }
 
 void m_timer()
 {
-  //Serial.println(rtc.getTimeStr());
-  //handleIntervalo(rtc.getTime().hour);
-  /*if(onTime==true){
-      //lcd.print("Encendido");
-      if(digitalRead(9) == LOW)
-      digitalWrite(9, HIGH);//LUZ ENCENDIDA
-    }else if(onTime==false){
-      //lcd.print("Apagado");
-      if(digitalRead(9) == HIGH)
-      digitalWrite(9, LOW);//LUZ ENCENDIDA
-    }*/
 }
 
 void init_timer()
 {
-  for (unsigned i = 0; i < sizeof(onTime); i++)
-    onTime[i] = false;
+  for (unsigned i = 0; i < (sizeof(timer_onTime)/sizeof(timer_onTime[0])); i++)
+    timer_onTime[i] = false;
 
   //timer_num_intervalos tiene que ser igual al numero de intervalos
-  timer_intervalos[0][0] = 8,timer_intervalos[0][1] = 21,  //luz
-  timer_intervalos[1][0] = 7,timer_intervalos[0][1] = 12,  //oxi
-  timer_intervalos[1][0] = 18,timer_intervalos[0][1] = 22, //oxi
+  timer_intervalos[0][0] = 1,timer_intervalos[0][1] = 21,timer_intervalos[0][2] = 0 ;//luz
+  timer_intervalos[1][0] = 7,timer_intervalos[0][1] = 12,timer_intervalos[1][2] = 1 ;//oxi
+  timer_intervalos[2][0] = 18,timer_intervalos[0][1] = 22,timer_intervalos[2][2] = 1 ;//oxi
 
   rtc.begin();
 }
