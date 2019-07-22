@@ -4,7 +4,8 @@ int trigger_gates[]={8,9};
 
 void m_trigger()
 {
-Serial.println("--------");
+Serial.print("----TRGR size---> ");
+Serial.println((sizeof(trigger_gates)/sizeof(trigger_gates[0])));
     for (unsigned i = 0; i < (sizeof(trigger_gates)/sizeof(trigger_gates[0])); i++)
     {
 
