@@ -34,21 +34,21 @@ int timer_getGate(int i)
 bool timer_gateIsOnTime(int g)
 {
 
-  Serial.print("Check gate ");
-  Serial.println(g);
+  //Serial.print("Check gate ");
+  //Serial.println(g);
   for (unsigned i = 0; i < timer_num_intervalos; i++)
   {
 
-    Serial.print(" with interval  ");
-    Serial.println(i);
+    //Serial.print(" with interval  ");
+    //Serial.println(i);
 
     if (timer_getOnTime(i) && timer_intervalos[i][2] == g)
     {
-      Serial.println("--its on time--");
+      //Serial.println("--its on time--");
       return true;
     }
   }
-  Serial.println("--not in time--");
+  //Serial.println("--not in time--");
   return false;
 }
 
@@ -64,10 +64,10 @@ void init_timer()
     Por ejemplo el siguiente seria timer_intervalos[3][x]... y timer_num_intervalos seria 4.
     -Las 12pm en el menor son las 0 y en el mayor son las 24.
   */
-  timer_intervalos[0][0] = 19, timer_intervalos[0][1] = 19, timer_intervalos[0][2] = 0; //luz
-  timer_intervalos[1][0] = 16, timer_intervalos[1][1] = 16, timer_intervalos[1][2] = 1; //oxi
+  timer_intervalos[0][0] = 7, timer_intervalos[0][1] = 22, timer_intervalos[0][2] = 0; //luz
+  timer_intervalos[1][0] = 7, timer_intervalos[1][1] = 12, timer_intervalos[1][2] = 1; //oxi
   //Esto seria tol puto dia
-  timer_intervalos[2][0] = 20, timer_intervalos[2][1] = 20, timer_intervalos[2][2] = 1; //oxi
+  timer_intervalos[2][0] = 19, timer_intervalos[2][1] = 22, timer_intervalos[2][2] = 1; //oxi
 
   rtc.begin();
 }
