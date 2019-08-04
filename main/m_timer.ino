@@ -51,9 +51,9 @@ void m_timer()
 void init_timer()
 {
   //timer_num_intervalos tiene que ser igual al numero de intervalos
-  timer_intervalos[0][0] = 0,timer_intervalos[0][1] = 1,timer_intervalos[0][2] = 0 ;//luz
-  timer_intervalos[1][0] = 0,timer_intervalos[0][1] = 0,timer_intervalos[1][2] = 1 ;//oxi
-  timer_intervalos[2][0] = 7,timer_intervalos[0][1] = 12,timer_intervalos[2][2] = 1 ;//oxi
+  timer_intervalos[0][0] = 7,timer_intervalos[0][1] = 17,timer_intervalos[0][2] = 0 ;//luz
+  timer_intervalos[1][0] = 7,timer_intervalos[0][1] = 11,timer_intervalos[1][2] = 1 ;//oxi
+  timer_intervalos[2][0] = 16,timer_intervalos[0][1] = 19,timer_intervalos[2][2] = 1 ;//oxi
 
   rtc.begin();
 }
