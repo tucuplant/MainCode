@@ -4,8 +4,6 @@ int trigger_gates[]={8,9};
 
 void m_trigger()
 {
-Serial.print("----TRGR size---> ");
-Serial.println((sizeof(trigger_gates)/sizeof(trigger_gates[0])));
     for (unsigned i = 0; i < (sizeof(trigger_gates)/sizeof(trigger_gates[0])); i++)
     {
 
@@ -13,12 +11,14 @@ Serial.println((sizeof(trigger_gates)/sizeof(trigger_gates[0])));
         {
             //lcd.print("Encendido");
             if (digitalRead(trigger_gates[i]) == LOW)
+                digitalWrite(trigger_gates[i], LOW);
                 digitalWrite(trigger_gates[i], HIGH);
         }
         else
         {
             //lcd.print("Apagado");
             if (digitalRead(trigger_gates[i]) == HIGH)
+                digitalWrite(trigger_gates[i], HIGH);
                 digitalWrite(trigger_gates[i], LOW);
         }
     }
